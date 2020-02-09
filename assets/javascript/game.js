@@ -10,6 +10,8 @@ var score = 0;
 var strGuess;
 
 var htmlGuess = document.getElementById("user-guess");
+var htmlWordMarquee = document.getElementById("word-marquee");
+console.log(htmlWordMarquee);
 
 // MAIN PROCESS 
 // ###############################
@@ -24,7 +26,17 @@ strWord = arrWordPlayList[randomIndex]; // get string value from array with rand
 console.log(strWord)
 
 // show word letter placeholders
+for (i=0; i<strWord.length;i++){
+    var letterDiv = document.createElement("div");
+    letterDiv.setAttribute("id", strWord.charAt(i));
+    letterDiv.setAttribute("class", "word-marquee-letters")
+    letterDiv.textContent = strWord[i];
+    console.log(letterDiv);
 
+    var test = document.getElementById("word-marquee");
+    console.log(htmlWordMarquee);
+    htmlWordMarquee.appendChild(letterDiv);
+}
 // get letter guess input from user
 document.onkeyup = function (event) {
     strGuess = event.key;

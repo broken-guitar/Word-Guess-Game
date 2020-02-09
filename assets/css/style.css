@@ -1,0 +1,14 @@
+
+body{
+    text-align: center;
+}
+
+#word-marquee{
+    display: inline;
+}
+
+
+.word-marquee-letters{
+    display: inline-block;
+    padding: 5px;
+}
