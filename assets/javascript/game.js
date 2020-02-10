@@ -4,8 +4,12 @@
 var arrWordMasterList = ["apple", "banana", "orange", "grape", "strawberry"];
 var arrWordPlayList = arrWordMasterList.slice(); // copy the word list into a second array for slicing
 var strWord;
+
+var objLetter = {};
+var arrLetterObjects = [];
 var arrLetterElements = [];
-var strLettersGuessed;
+var strLettersGuessed = "";
+
 var score = 0;
 var strGuess;
 
@@ -25,39 +29,78 @@ console.log(randomIndex);
 strWord = arrWordPlayList[randomIndex]; // get string value from array with random index
 console.log(strWord);
 
-// render word marquee
+// initialize word marquee; loop through each letter in the word
 for (i = 0; i < strWord.length; i++) {
+  // create letter object to store info about the letter in the word,
+  // then store push to an array to access later
+  var objLetter = {
+    wordIndex: i,
+    letter: strWord.charAt(i),
+    guessed: false
+  };
+  arrLetterObjects.push(objLetter);
+
+  // create an html element for the letter
   var letterDiv = document.createElement("div");
   letterDiv.setAttribute("id", i);
-  letterDiv.setAttribute("letter-value-data", strWord.charAt(i));
-  letterDiv.setAttribute("letter-guessed-data", false);
   letterDiv.setAttribute("class", "word-marquee-letters");
   letterDiv.textContent = "_";
 
-  arrLetterElements.push(letterDiv);
-  //   console.log("arrayLetters" + i + ".id = " + arrLetters[i].getAttribute("id"));
-
+  // render the letter element on the page
   htmlWordMarquee.appendChild(letterDiv);
 }
 
 // get letter guess input from user
 document.onkeyup = function(event) {
   strGuess = event.key;
-  document.getElementById("user-guess").textContent = strGuess;
 
-  // use regex to see if key press is alpha
-  if (/[a-z]/i) {
-    // key pressed was an alpha, now check the guess against each letter in word
-    arrLetterElements.forEach(function(current, index, arr) {
-      var letter = current.getAttribute("letter-value-data");
-      if (letter.toLowerCase() === strGuess.toLowerCase()) {
-        current.textContent = letter;
-        current.setAttribute("letter-guessed-data", true);
+  // use regex to check if key pressed is a (single) letter key
+  if (/^[a-z]{1}$/i.test(strGuess)) {
+    // key press is a letter
+    console.log("regex true; key = " + strGuess);
+    document.getElementById("user-guess").textContent = strGuess; // render guess on page
+    strLettersGuessed += strGuess;
+    document.getElementById(
+      "letters-guessed-p"
+    ).textContent = strLettersGuessed;
+    // check guess against each letter in word
+    arrLetterObjects.forEach(function(current, index, arr) {
+      if (current.letter.toLowerCase() === strGuess.toLowerCase()) {
+        // letter was guessed correctly
+
+        // record the letter as guessed
+        current.guessed = true;
+
+        // show the correctly guessed letter(s) on the marquee
+        document.getElementById(current.wordIndex).textContent = current.letter;
+
+        // if every letter has been guessed correctly
+        if (
+          arrLetterObjects.every(function(element) {
+            return element.guessed === true;
+          })
+        ) {
+          // word is complete: update user score
+          // <need code>
+          setTimeout(function() {
+            alert('You guessed the word "' + strWord + '"!');
+          }, 1000);
+
+          // <need code>
+          // if not all words played, move to next word...
+          // re-initialize page with a new word
+        } else {
+          // word is not complete
+          // <need code> tell loop to continue
+        }
+      } else {
+        // letter was NOT guessed correctly
+        // add letter to letters-guessed content
       }
-      //   console.log("currentLetter = " + currentLetter.getAttribute("letter-value-data"));
     });
   } else {
-    // key pressed wasn't an alpha
+    // key press is not alpha
+    console.log("regex false; key= " + strGuess);
   }
 };
 
