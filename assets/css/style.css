@@ -4,8 +4,30 @@ body {
   overflow: auto;
 }
 
+#game-banner{
+  font-size: 16pt;
+}
+
+#continue{
+  margin-top: 15px;
+  font-size: 16pt;
+  color: green;
+  
+  animation-name: continue;
+  animation-duration: 1.5s;
+  animation-iteration-count: 2;
+}
+
+@keyframes continue{
+0% {opacity: 0%;}
+25% {opacity: 50%;}
+50% {opacity: 100%;}
+75% {opacity: 50%;}
+100% {opacity: 0%;}
+
+}
+
 #word-marquee {
-  margin-top: 25px;
   display: inline;
   white-space: nowrap;
   /* min-width: 300px; */
@@ -19,6 +41,12 @@ body {
   /* width: 25px; */
 }
 
+#user-guess{
+  margin-top: 25px;
+  font-weight: bold;
+  /* font-size: 36pt; */
+}
+
 #letters-guessed-container {
   width: min-content;
   display: table;
@@ -30,13 +58,26 @@ body {
 }
 
 #letters-guessed-p {
-  font-size: 18pt;
+  font-size: 20pt;
+  color: gray;
   text-align: justify;
   height: auto;
   position: relative;
   width: 100px;
   word-wrap: break-word;
   white-space: pre-wrap;
-  word-spacing: 10px;
-  letter-spacing: 2px;
+  word-spacing: 5px;
+  letter-spacing: 5px;
+}
+
+#user-score-container{
+  position: fixed;
+  bottom: 0;
+  left: 25px;
+}
+
+#guesses-left-container{
+  position: fixed;
+  bottom: 0;
+  right: 25px;
 }
