@@ -25,7 +25,7 @@ var htmlLettersGuessed = document.getElementById("letters-guessed-p");
 // initialize
 strWord = "";
 arrWordPlayList = arrWordMasterList.slice(); // copy the word list into a second array for splicing (to prevent word replays)
-selectWord();
+selectNewWord();
 
 
 
@@ -74,7 +74,7 @@ document.onkeyup = function (event) {
             }, 500);
 
             // select a new word
-            selectWord();
+            selectNewWord();
 
           } else {
             // word is not complete
@@ -100,7 +100,7 @@ document.onkeyup = function (event) {
 // ###############################
 
 // select new word and render page
-function selectWord() {
+function selectNewWord() {
 
   //clear elements and variables
   strLettersGuessed = "";
