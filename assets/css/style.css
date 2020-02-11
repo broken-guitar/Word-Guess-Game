@@ -5,6 +5,7 @@ body {
 }
 
 #word-marquee {
+  margin-top: 25px;
   display: inline;
   white-space: nowrap;
   /* min-width: 300px; */
@@ -29,7 +30,7 @@ body {
 }
 
 #letters-guessed-p {
-  font-size: 16pt;
+  font-size: 18pt;
   text-align: justify;
   height: auto;
   position: relative;
